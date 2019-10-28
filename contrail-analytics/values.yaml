@@ -1,15 +1,15 @@
 global:
   images:
     tags:
-      nodemgr: "docker.io/opencontrailnightly/contrail-nodemgr:latest"
-      contrail_status: "docker.io/opencontrailnightly/contrail-status:latest"
-      node_init: "docker.io/opencontrailnightly/contrail-node-init:latest"
-      analytics_api: "docker.io/opencontrailnightly/contrail-analytics-api:latest"
-      contrail_collector: "docker.io/opencontrailnightly/contrail-analytics-collector:latest"
-      analytics_alarm_gen: "docker.io/opencontrailnightly/contrail-analytics-alarm-gen:latest"
-      analytics_snmp_collector: "docker.io/opencontrailnightly/contrail-analytics-snmp-collector:latest"
-      contrail_topology: "docker.io/opencontrailnightly/contrail-analytics-snmp-topology:latest"
-      dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.2.1
+      nodemgr: "docker.io/opencontrailnightly/contrail-nodemgr:master-latest"
+      contrail_status: "docker.io/opencontrailnightly/contrail-status:master-latest"
+      node_init: "docker.io/opencontrailnightly/contrail-node-init:master-latest"
+      analytics_api: "docker.io/opencontrailnightly/contrail-analytics-api:master-latest"
+      contrail_collector: "docker.io/opencontrailnightly/contrail-analytics-collector:master-latest"
+      analytics_alarm_gen: "docker.io/opencontrailnightly/contrail-analytics-alarm-gen:master-latest"
+      analytics_snmp_collector: "docker.io/opencontrailnightly/contrail-analytics-snmp-collector:master-latest"
+      contrail_topology: "docker.io/opencontrailnightly/contrail-analytics-snmp-topology:master-latest"
+      dep_check: quay.io/airshipit/kubernetes-entrypoint:v1.0.0
     imagePullPolicy: "IfNotPresent"
     # Specify imageCredentials
     imageCredentials:
