@@ -192,6 +192,8 @@ spec:
           name: var-run
         - mountPath: /etc/contrail/ssl
           name: ssl-dir
+        - mountPath: /host/etc
+          name: host-etc
       - name: contrail-vrouter-nodemgr
         image: {{ .Values.global.images.tags.nodemgr | quote }}
         imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
@@ -267,6 +269,9 @@ spec:
       - name: host-sysctld-dir
         hostPath:
           path: /etc/sysctl.d
+      - name: host-etc
+        hostPath:
+          path: /etc
 {{- if .Values.manifests.job_kubernetes_cni_init }}
       - name: etc-cni
         hostPath:
