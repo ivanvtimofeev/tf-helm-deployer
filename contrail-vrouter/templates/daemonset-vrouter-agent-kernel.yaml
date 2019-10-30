@@ -160,13 +160,13 @@ spec:
 {{- if .Values.manifests.configmap_vrouter_keystone }}
         - configMapRef:
             name: contrail-vrouter-keystone
-{{- end }}
         env:
         - name: KEYSTONE_AUTH_ADMIN_PASSWORD
           valueFrom:
             secretKeyRef:
               name: {{ .Values.secrets.keystone.admin }}
               key: KEYSTONE_AUTH_ADMIN_PASSWORD
+{{- end }}
         lifecycle:
           preStop:
             exec:
@@ -175,6 +175,8 @@ spec:
 {{- if eq $host_os "centos"}}
         - mountPath: /etc/sysconfig/network-scripts
           name: network-scripts
+        - mountPath: /dev
+          name: dev
 {{- end }}
         - mountPath: /lib/modules
           name: lib-modules
@@ -205,17 +207,18 @@ spec:
 {{- if .Values.manifests.configmap_vrouter_keystone }}
         - configMapRef:
             name: contrail-vrouter-keystone
+        env:
+        - name: KEYSTONE_AUTH_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.keystone.admin }}
+              key: KEYSTONE_AUTH_ADMIN_PASSWORD
 {{- end }}
         env:
         - name: NODE_TYPE
           value: vrouter
         - name: DOCKER_HOST
           value: "unix://mnt/docker.sock"
-        - name: KEYSTONE_AUTH_ADMIN_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Values.secrets.keystone.admin }}
-              key: KEYSTONE_AUTH_ADMIN_PASSWORD
         volumeMounts:
         - mountPath: /mnt/docker.sock
           name: docker-unix-socket
@@ -230,10 +233,13 @@ spec:
       - name: usr-src
         hostPath:
           path: /usr/src
-{{- else if $host_os "centos" }}
+{{- else if eq $host_os "centos" }}
       - name: network-scripts
         hostPath:
           path: /etc/sysconfig/network-scripts
+      - name: dev
+        hostPath:
+          path: /dev
 {{- end }}
       - name: lib-modules
         hostPath:
