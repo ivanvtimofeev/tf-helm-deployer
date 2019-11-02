@@ -177,6 +177,8 @@ spec:
           name: network-scripts
         - mountPath: /dev
           name: dev
+        - mountPath: /etc/dhcp
+          name: etc-dhcp
 {{- end }}
         - mountPath: /lib/modules
           name: lib-modules
@@ -240,6 +242,9 @@ spec:
       - name: dev
         hostPath:
           path: /dev
+      - name: etc-dhcp
+        hostPath:
+          path: /etc/dhcp
 {{- end }}
       - name: lib-modules
         hostPath:
