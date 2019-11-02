@@ -48,7 +48,6 @@ global:
     LOG_LEVEL: SYS_NOTICE
     CLOUD_ORCHESTRATOR: openstack
     AAA_MODE: cloud-admin
-    VROUTER_GATEWAY: 6.6.6.1
     ANALYTICSDB_ENABLE: "true"
     ANALYTICS_ALARM_ENABLE: "true"
     ANALYTICS_SNMP_ENABLE: "true"
