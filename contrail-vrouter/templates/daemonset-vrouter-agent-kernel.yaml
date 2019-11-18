@@ -85,9 +85,8 @@ spec:
 {{- if .Values.manifests.configmap_vrouter_keystone }}
           - configMapRef:
               name: contrail-vrouter-keystone
-{{- else }}
-          env:
 {{- end }}
+          env:
           - name: KEYSTONE_AUTH_ADMIN_PASSWORD
             valueFrom:
               secretKeyRef:
