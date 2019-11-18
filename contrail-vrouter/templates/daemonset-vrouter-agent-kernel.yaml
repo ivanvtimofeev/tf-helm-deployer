@@ -216,8 +216,9 @@ spec:
             secretKeyRef:
               name: {{ .Values.secrets.keystone.admin }}
               key: KEYSTONE_AUTH_ADMIN_PASSWORD
-{{- end }}
+{{- else }}
         env:
+{{- end }}
         - name: NODE_TYPE
           value: vrouter
         - name: DOCKER_HOST
