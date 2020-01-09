@@ -251,7 +251,7 @@ spec:
             name: var-crashes-vrouter
 {{- end }}
       - name: contrail-vrouter-agent
-        image: {{ $context.Values.global.images.tags.vrouter_agent | quote }}
+        image: {{ $context.Values.global.images.tags.vrouter_agent | default ( printf "%s/contrail-vrouter-agent:%s" $context.Values.global.contrail_env.CONTAINER_REGISTRY $context.Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
         imagePullPolicy: {{ default "" $context.Values.global.images.imagePullPolicy | quote }}
         securityContext:
           privileged: true

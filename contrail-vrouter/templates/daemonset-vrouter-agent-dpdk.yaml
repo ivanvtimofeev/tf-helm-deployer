@@ -179,7 +179,7 @@ spec:
           - mountPath: /host/etc
             name: host-etc
         - name: contrail-vrouter-agent
-          image: {{ .Values.global.images.tags.vrouter_agent | quote }}
+          image: {{ .Values.global.images.tags.vrouter_agent | default ( printf "%s/contrail-vrouter-agent:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
           imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
           securityContext:
             privileged: true
