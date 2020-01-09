@@ -88,7 +88,7 @@ spec:
             name: usr-src
 {{- end }}
         - name: contrail-vrouter-init-dpdk
-          image: {{ .Values.global.images.tags.vrouter_init_dpdk | quote }}
+          image: {{ .Values.global.images.tags.vrouter_init_dpdk | default (printf "%s/contrail-vrouter-kernel-init-dpdk:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG) | quote }}
           imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
           securityContext:
             privileged: true
