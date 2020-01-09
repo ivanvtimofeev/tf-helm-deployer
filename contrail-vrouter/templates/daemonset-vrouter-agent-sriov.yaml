@@ -85,7 +85,7 @@ spec:
 {{- if and $agent_mode ( eq $agent_mode "kernel" ) }}
 {{- if eq $host_os "ubuntu"}}
         - name: contrail-vrouter-init-kernel
-          image: {{ $context.Values.global.images.tags.build_driver_init | quote }}
+          image: {{ $context.Values.global.images.tags.build_driver_init | default ( printf "%s/contrail-vrouter-kernel-build-init:%s" $context.Values.global.contrail_env.CONTAINER_REGISTRY $context.Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) |  quote }}
           imagePullPolicy: {{ default "" $context.Values.global.images.imagePullPolicy | quote }}
           securityContext:
             privileged: true

@@ -73,7 +73,7 @@ spec:
             name: host-sysctld-dir
 {{- if eq $host_os "ubuntu"}}
         - name: contrail-vrouter-init-kernel
-          image: {{ .Values.global.images.tags.build_driver_init | quote }}
+          image: {{ .Values.global.images.tags.build_driver_init | default ( printf "%s/contrail-vrouter-kernel-build-init:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
           imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
           securityContext:
             privileged: true
