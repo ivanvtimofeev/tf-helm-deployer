@@ -113,7 +113,7 @@ spec:
             name: host-bin
 {{- else if $host_os "centos" }}
         - name: contrail-vrouter-init-kernel
-          image: {{ $context.Values.global.images.tags.vrouter_init_kernel | quote }}
+          image: {{ $context.Values.global.images.tags.vrouter_init_kernel | default ( printf "%s/contrail-vrouter-kernel-init:%s" $context.Values.global.contrail_env.CONTAINER_REGISTRY $context.Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
           imagePullPolicy: {{ default "" $context.Values.global.images.imagePullPolicy | quote }}
           securityContext:
             privileged: true
