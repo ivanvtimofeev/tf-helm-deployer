@@ -69,7 +69,7 @@ spec:
             privileged: true
           env:
           - name: CONTRAIL_STATUS_IMAGE
-            value: {{ $context.Values.global.images.tags.contrail_status | quote }}
+            value: {{ $context.Values.global.images.tags.contrail_status | default ( printf "%s/contrail-status:%s" $context.Values.global.contrail_env.CONTAINER_REGISTRY $context.Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
           envFrom:
           - configMapRef:
               name: contrail-vrouter
