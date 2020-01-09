@@ -63,7 +63,7 @@ spec:
       initContainers:
 {{ tuple $context $dependencies nil | include "helm-toolkit.snippets.kubernetes_entrypoint_init_container" | indent 8 }}
         - name: contrail-node-init
-          image: {{ $context.Values.global.images.tags.node_init | quote }}
+          image: {{ $context.Values.global.images.tags.node_init | default ( printf "%s/contrail-node-init:%s" $context.Values.global.contrail_env.CONTAINER_REGISTRY $context.Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
           imagePullPolicy: {{ default "" $context.Values.global.images.imagePullPolicy | quote }}
           securityContext:
             privileged: true
