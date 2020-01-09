@@ -138,7 +138,7 @@ spec:
 {{- end }}
       containers:
         - name: contrail-vrouter-dpdk
-          image: {{ .Values.global.images.tags.vrouter_dpdk | quote }}
+          image: {{ .Values.global.images.tags.vrouter_dpdk | default (printf "%s/contrail-vrouter-agent-dpdk:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
           imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
           securityContext:
             privileged: true
