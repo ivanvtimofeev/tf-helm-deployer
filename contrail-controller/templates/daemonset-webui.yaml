@@ -63,7 +63,7 @@ spec:
             name: host-sysctld-dir
       containers:
       - name: contrail-webui-middleware
-        image: {{ .Values.global.images.tags.webui_middleware | quote }}
+        image: {{ .Values.global.images.tags.webui_middleware | default (printf "%s/contrail-controller-webui-job:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG )| quote }}
         imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
         ports:
         - name: http-port
