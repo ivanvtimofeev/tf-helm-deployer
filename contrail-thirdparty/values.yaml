@@ -2,8 +2,8 @@ global:
   images:
     tags:
       # You can override containers here
-      # kafka: "docker.io/opencontrailnightly/contrail-external-kafka:master-latest"
-      cassandra: "docker.io/opencontrailnightly/contrail-external-cassandra:master-latest"
+      #   kafka: "docker.io/opencontrailnightly/contrail-external-kafka:master-latest"
+      #   cassandra: "docker.io/opencontrailnightly/contrail-external-cassandra:master-latest"
       redis: "docker.io/opencontrailnightly/contrail-external-redis:master-latest"
       zookeeper: "docker.io/opencontrailnightly/contrail-external-zookeeper:master-latest"
       rabbitmq: "docker.io/opencontrailnightly/contrail-external-rabbitmq:master-latest"
@@ -20,6 +20,8 @@ global:
       # password: password
 
   contrail_env:
+    CONTAINER_REGISTRY: docker.io/opencontrailnightly
+    CONTRAIL_CONTAINER_TAG: master-latest
     CONTROLLER_NODES: 10.87.65.248
     LOG_LEVEL: SYS_NOTICE
     CLOUD_ORCHESTRATOR: openstack
