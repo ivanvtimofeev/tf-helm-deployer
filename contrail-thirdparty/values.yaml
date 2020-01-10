@@ -8,7 +8,7 @@ global:
       #   zookeeper: "docker.io/opencontrailnightly/contrail-external-zookeeper:master-latest"
       #   rabbitmq: "docker.io/opencontrailnightly/contrail-external-rabbitmq:master-latest"
       #   nodemgr: "docker.io/opencontrailnightly/contrail-nodemgr:master-latest"
-      analytics_query_engine: "docker.io/opencontrailnightly/contrail-analytics-query-engine:master-latest"
+      #   analytics_query_engine: "docker.io/opencontrailnightly/contrail-analytics-query-engine:master-latest"
       contrail_status: "docker.io/opencontrailnightly/contrail-status:master-latest"
       node_init: "docker.io/opencontrailnightly/contrail-node-init:master-latest"
       dep_check: quay.io/airshipit/kubernetes-entrypoint:v1.0.0
