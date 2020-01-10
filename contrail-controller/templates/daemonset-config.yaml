@@ -95,7 +95,7 @@ spec:
         - mountPath: /etc/contrail/ssl
           name: ssl-dir
       - name: contrail-devicemgr
-        image: {{ .Values.global.images.tags.config_devicemgr | quote }}
+        image: {{ .Values.global.images.tags.config_devicemgr | default (printf "%s/contrail-controller-config-devicemgr:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
         imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
         envFrom:
         - configMapRef:
