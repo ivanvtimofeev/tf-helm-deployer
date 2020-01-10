@@ -5,7 +5,7 @@ global:
       #   nodemgr: "docker.io/opencontrailnightly/contrail-nodemgr:master-latest"
       #   contrail_status: "docker.io/opencontrailnightly/contrail-status:master-latest"
       #   node_init: "docker.io/opencontrailnightly/contrail-node-init:master-latest"
-      analytics_api: "docker.io/opencontrailnightly/contrail-analytics-api:master-latest"
+      #   analytics_api: "docker.io/opencontrailnightly/contrail-analytics-api:master-latest"
       contrail_collector: "docker.io/opencontrailnightly/contrail-analytics-collector:master-latest"
       analytics_alarm_gen: "docker.io/opencontrailnightly/contrail-analytics-alarm-gen:master-latest"
       analytics_snmp_collector: "docker.io/opencontrailnightly/contrail-analytics-snmp-collector:master-latest"
