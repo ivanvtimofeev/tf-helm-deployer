@@ -88,7 +88,7 @@ spec:
             name: host-sysctld-dir
       containers:
       - name: contrail-kube-manager
-        image: {{ .Values.global.images.tags.kube_manager | quote }}
+        image: {{ .Values.global.images.tags.kube_manager | default (printf "%s/contrail-kubernetes-kube-manager:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
         imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
         envFrom:
         - configMapRef:
