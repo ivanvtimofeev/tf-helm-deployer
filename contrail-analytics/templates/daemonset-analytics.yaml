@@ -91,7 +91,7 @@ spec:
         - mountPath: /etc/contrail/ssl
           name: ssl-dir
       - name: contrail-collector
-        image: {{ .Values.global.images.tags.contrail_collector | quote }}
+        image: {{ .Values.global.images.tags.contrail_collector | default (printf "%s/contrail-analytics-collector:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
         imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
         envFrom:
         - configMapRef:
