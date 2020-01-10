@@ -5,7 +5,7 @@ global:
       #   kafka: "docker.io/opencontrailnightly/contrail-external-kafka:master-latest"
       #   cassandra: "docker.io/opencontrailnightly/contrail-external-cassandra:master-latest"
       #   redis: "docker.io/opencontrailnightly/contrail-external-redis:master-latest"
-      zookeeper: "docker.io/opencontrailnightly/contrail-external-zookeeper:master-latest"
+      #   zookeeper: "docker.io/opencontrailnightly/contrail-external-zookeeper:master-latest"
       rabbitmq: "docker.io/opencontrailnightly/contrail-external-rabbitmq:master-latest"
       nodemgr: "docker.io/opencontrailnightly/contrail-nodemgr:master-latest"
       analytics_query_engine: "docker.io/opencontrailnightly/contrail-analytics-query-engine:master-latest"
