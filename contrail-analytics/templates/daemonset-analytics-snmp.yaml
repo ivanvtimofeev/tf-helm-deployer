@@ -82,7 +82,7 @@ spec:
         - mountPath: /var/crashes
           name: var-crashes-analytics
       - name: contrail-topology
-        image: {{ .Values.global.images.tags.contrail_topology | quote }}
+        image: {{ .Values.global.images.tags.contrail_topology | default (printf "%s/contrail-analytics-snmp-topology:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
         imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
         envFrom:
         - configMapRef:
