@@ -88,7 +88,7 @@ spec:
         - mountPath: /var/crashes
           name: var-crashes-analytics
       - name: contrail-analytics-alarm-nodemgr
-        image: {{ .Values.global.images.tags.nodemgr | quote }}
+        image: {{ .Values.global.images.tags.nodemgr | default (printf "%s/contrail-nodemgr:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
         imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
         envFrom:
         - configMapRef:

@@ -1,7 +1,8 @@
 global:
   images:
     tags:
-      nodemgr: "docker.io/opencontrailnightly/contrail-nodemgr:master-latest"
+      # You can override containers here:
+      # nodemgr: "docker.io/opencontrailnightly/contrail-nodemgr:master-latest"
       contrail_status: "docker.io/opencontrailnightly/contrail-status:master-latest"
       node_init: "docker.io/opencontrailnightly/contrail-node-init:master-latest"
       analytics_api: "docker.io/opencontrailnightly/contrail-analytics-api:master-latest"
