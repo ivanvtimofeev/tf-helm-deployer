@@ -118,7 +118,7 @@ spec:
         - mountPath: /var/crashes
           name: var-crashes-control
       - name: contrail-named
-        image: {{ .Values.global.images.tags.control_named | quote }}
+        image: {{ .Values.global.images.tags.control_named | default (printf "%s/contrail-controller-control-named:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
         imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
         securityContext:
           privileged: true
