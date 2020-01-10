@@ -63,7 +63,7 @@ spec:
             name: host-sysctld-dir
       containers:
       - name: contrail-alarm-gen
-        image: {{ .Values.global.images.tags.analytics_alarm_gen | quote }}
+        image: {{ .Values.global.images.tags.analytics_alarm_gen | defaults ( printf "%s/contrail-analytics-alarm-gen:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG )| quote }}
         imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
         envFrom:
         - configMapRef:
