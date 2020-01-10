@@ -1,7 +1,8 @@
 global:
   images:
     tags:
-      kafka: "docker.io/opencontrailnightly/contrail-external-kafka:master-latest"
+      # You can override containers here
+      # kafka: "docker.io/opencontrailnightly/contrail-external-kafka:master-latest"
       cassandra: "docker.io/opencontrailnightly/contrail-external-cassandra:master-latest"
       redis: "docker.io/opencontrailnightly/contrail-external-redis:master-latest"
       zookeeper: "docker.io/opencontrailnightly/contrail-external-zookeeper:master-latest"
