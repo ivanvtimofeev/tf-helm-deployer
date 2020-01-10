@@ -1,7 +1,8 @@
 global:
   images:
     tags:
-      nodemgr: "docker.io/opencontrailnightly/contrail-nodemgr:master-latest"
+      # You can override containers here:
+      #   nodemgr: "docker.io/opencontrailnightly/contrail-nodemgr:master-latest"
       contrail_status: "docker.io/opencontrailnightly/contrail-status:master-latest"
       node_init: "docker.io/opencontrailnightly/contrail-node-init:master-latest"
       contrail_control: "docker.io/opencontrailnightly/contrail-controller-control-control:master-latest"
@@ -23,6 +24,8 @@ global:
       # password: password
 
   contrail_env:
+    CONTAINER_REGISTRY: docker.io/opencontrailnightly
+    CONTRAIL_CONTAINER_TAG: master-latest
     CONTROLLER_NODES: 10.87.65.248
     LOG_LEVEL: SYS_NOTICE
     CLOUD_ORCHESTRATOR: openstack

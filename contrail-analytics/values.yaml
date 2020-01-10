@@ -19,6 +19,8 @@ global:
       # password: password
 
   contrail_env:
+    CONTAINER_REGISTRY: docker.io/opencontrailnightly
+    CONTRAIL_CONTAINER_TAG: master-latest
     CONTROLLER_NODES: 10.87.65.248
     LOG_LEVEL: SYS_NOTICE
     CLOUD_ORCHESTRATOR: openstack
