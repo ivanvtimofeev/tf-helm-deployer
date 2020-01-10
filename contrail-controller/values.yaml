@@ -8,7 +8,7 @@ global:
       #   contrail_control: "docker.io/opencontrailnightly/contrail-controller-control-control:master-latest"
       #   control_dns: "docker.io/opencontrailnightly/contrail-controller-control-dns:master-latest"
       #   control_named: "docker.io/opencontrailnightly/contrail-controller-control-named:master-latest"
-      config_api: "docker.io/opencontrailnightly/contrail-controller-config-api:master-latest"
+      #   config_api: "docker.io/opencontrailnightly/contrail-controller-config-api:master-latest"
       config_devicemgr: "docker.io/opencontrailnightly/contrail-controller-config-devicemgr:master-latest"
       config_schema_transformer: "docker.io/opencontrailnightly/contrail-controller-config-schema:master-latest"
       config_svcmonitor: "docker.io/opencontrailnightly/contrail-controller-config-svcmonitor:master-latest"
