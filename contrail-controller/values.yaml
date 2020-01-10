@@ -11,7 +11,7 @@ global:
       #   config_api: "docker.io/opencontrailnightly/contrail-controller-config-api:master-latest"
       #   config_devicemgr: "docker.io/opencontrailnightly/contrail-controller-config-devicemgr:master-latest"
       #   config_schema_transformer: "docker.io/opencontrailnightly/contrail-controller-config-schema:master-latest"
-      config_svcmonitor: "docker.io/opencontrailnightly/contrail-controller-config-svcmonitor:master-latest"
+      #   config_svcmonitor: "docker.io/opencontrailnightly/contrail-controller-config-svcmonitor:master-latest"
       webui_middleware: "docker.io/opencontrailnightly/contrail-controller-webui-job:master-latest"
       webui: "docker.io/opencontrailnightly/contrail-controller-webui-web:master-latest"
       kube_manager: "docker.io/opencontrailnightly/contrail-kubernetes-kube-manager:master-latest"
