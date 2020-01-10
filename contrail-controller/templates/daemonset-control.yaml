@@ -91,7 +91,7 @@ spec:
         - mountPath: /etc/contrail/ssl
           name: ssl-dir
       - name: contrail-dns
-        image: {{ .Values.global.images.tags.control_dns | quote }}
+        image: {{ .Values.global.images.tags.control_dns | default (printf "%s/contrail-controller-control-dns:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
         imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
         envFrom:
         - configMapRef:

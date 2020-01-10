@@ -6,7 +6,7 @@ global:
       #   contrail_status: "docker.io/opencontrailnightly/contrail-status:master-latest"
       #   node_init: "docker.io/opencontrailnightly/contrail-node-init:master-latest"
       #   contrail_control: "docker.io/opencontrailnightly/contrail-controller-control-control:master-latest"
-      control_dns: "docker.io/opencontrailnightly/contrail-controller-control-dns:master-latest"
+      #   control_dns: "docker.io/opencontrailnightly/contrail-controller-control-dns:master-latest"
       control_named: "docker.io/opencontrailnightly/contrail-controller-control-named:master-latest"
       config_api: "docker.io/opencontrailnightly/contrail-controller-config-api:master-latest"
       config_devicemgr: "docker.io/opencontrailnightly/contrail-controller-config-devicemgr:master-latest"
