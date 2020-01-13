@@ -42,7 +42,7 @@ spec:
 {{ tuple $context $dependencies nil | include "helm-toolkit.snippets.kubernetes_entrypoint_init_container" | indent 8 }}
       containers:
       - name: redis
-        image: {{ .Values.global.images.tags.redis | quote }}
+        image: {{ .Values.global.images.tags.contrail_external_redis | default (printf "%s/contrail-external-redis:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
         imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
         envFrom:
         - configMapRef:
