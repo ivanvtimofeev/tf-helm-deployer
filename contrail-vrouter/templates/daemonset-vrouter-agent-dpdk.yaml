@@ -51,7 +51,7 @@ spec:
       initContainers:
 {{ tuple $context $dependencies nil | include "helm-toolkit.snippets.kubernetes_entrypoint_init_container" | indent 8 }}
         - name: contrail-node-init
-          image: {{ .Values.global.images.tags.node_init | default ( printf "%s/contrail-node-init:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
+          image: {{ .Values.global.images.tags.contrail_node_init | default ( printf "%s/contrail-node-init:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
           imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
           securityContext:
             privileged: true
@@ -72,7 +72,7 @@ spec:
             name: host-sysctld-dir
 {{- if and (eq $host_os "ubuntu") (eq $uio_driver "mlnx") }}
         - name: contrail-vrouter-plugin-mellanox-init
-          image: {{ $context.Values.global.images.tags.vrouter_plugin_mellanox_init | default (printf "%s/contrail-vrouter-plugin-mellanox-init-ubuntu:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
+          image: {{ $context.Values.global.images.tags.contrail_vrouter_plugin_mellanox_init_ubuntu | default (printf "%s/contrail-vrouter-plugin-mellanox-init-ubuntu:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
           imagePullPolicy: {{ default "" $context.Values.global.images.imagePullPolicy | quote }}
           securityContext:
             privileged: true
@@ -88,7 +88,7 @@ spec:
             name: usr-src
 {{- end }}
         - name: contrail-vrouter-init-dpdk
-          image: {{ .Values.global.images.tags.vrouter_init_dpdk | default (printf "%s/contrail-vrouter-kernel-init-dpdk:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG) | quote }}
+          image: {{ .Values.global.images.tags.contrail_vrouter_kernel_init_dpdk | default (printf "%s/contrail-vrouter-kernel-init-dpdk:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG) | quote }}
           imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
           securityContext:
             privileged: true
@@ -120,7 +120,7 @@ spec:
             name: host-bin
 {{- if .Values.manifests.job_kubernetes_cni_init }}
         - name: contrail-kubernetes-cni-init
-          image: {{ .Values.global.images.tags.kubernetes_cni_init | default(printf "%s/contrail-kubernetes-cni-init:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG) | quote }}
+          image: {{ .Values.global.images.tags.contrail_kubernetes_cni_init | default(printf "%s/contrail-kubernetes-cni-init:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG) | quote }}
           imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
           envFrom:
           - configMapRef:
@@ -138,7 +138,7 @@ spec:
 {{- end }}
       containers:
         - name: contrail-vrouter-dpdk
-          image: {{ .Values.global.images.tags.vrouter_dpdk | default (printf "%s/contrail-vrouter-agent-dpdk:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
+          image: {{ .Values.global.images.tags.contrail_vrouter_agent_dpdk | default (printf "%s/contrail-vrouter-agent-dpdk:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
           imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
           securityContext:
             privileged: true
@@ -179,7 +179,7 @@ spec:
           - mountPath: /host/etc
             name: host-etc
         - name: contrail-vrouter-agent
-          image: {{ .Values.global.images.tags.vrouter_agent | default ( printf "%s/contrail-vrouter-agent:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
+          image: {{ .Values.global.images.tags.contrail_vrouter_agent | default ( printf "%s/contrail-vrouter-agent:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
           imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
           securityContext:
             privileged: true
@@ -218,7 +218,7 @@ spec:
             name: network-scripts
 {{- end }}
         - name: contrail-vrouter-nodemgr
-          image: {{ .Values.global.images.tags.nodemgr | default ( printf "%s/contrail-nodemgr:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
+          image: {{ .Values.global.images.tags.contrail_nodemgr | default ( printf "%s/contrail-nodemgr:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
           imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
           envFrom:
           - configMapRef:
