@@ -192,7 +192,7 @@ spec:
 {{- end }}
 {{- if .Values.manifests.job_kubernetes_cni_init }}
         - name: contrail-kubernetes-cni-init
-          image: {{ .Values.global.images.tags.contrail_kubernetes_cni_init | default(printf "%s/contrail-kubernetes-cni-init:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG) | quote }}
+          image: {{ .Values.global.images.tags.contrail_kubernetes_cni_init | default (printf "%s/contrail-kubernetes-cni-init:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG) | quote }}
           imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
           envFrom:
           - configMapRef:
