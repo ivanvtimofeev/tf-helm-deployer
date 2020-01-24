@@ -146,6 +146,8 @@ spec:
           name: etc-contrail-dns
         - mountPath: /var/crashes
           name: var-crashes-control
+
+
       - name: contrail-control-nodemgr
         image: {{ .Values.global.images.tags.contrail_nodemgr | default (printf "%s/contrail-nodemgr:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
         imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
@@ -169,6 +171,31 @@ spec:
         volumeMounts:
         - mountPath: /mnt/docker.sock
           name: docker-unix-socket
+        - mountPath: /var/log/contrail/
+          name: contrail-log
+        - mountPath: /var/crashes
+          name: var-crashes-control
+        - mountPath: /etc/contrail/ssl
+          name: ssl-dir
+      - name: contrail-control-provisioner
+        image: {{ .Values.global.images.tags.contrail_provisioner | default (printf "%s/contrail-provisioner:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
+        imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
+        envFrom:
+        - configMapRef:
+            name: contrail-controller-env
+{{- if .Values.manifests.configmap_controller_keystone }}
+        - configMapRef:
+            name: contrail-controller-keystone
+{{- end }}
+        env:
+        - name: NODE_TYPE
+          value: control
+        - name: KEYSTONE_AUTH_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.keystone.admin }}
+              key: KEYSTONE_AUTH_ADMIN_PASSWORD
+        volumeMounts:
         - mountPath: /var/log/contrail/
           name: contrail-log
         - mountPath: /var/crashes
