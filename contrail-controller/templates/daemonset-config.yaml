@@ -202,6 +202,35 @@ spec:
           name: var-crashes-config
         - mountPath: /etc/contrail/ssl
           name: ssl-dir
+      - name: contrail-config-provisioner
+        image: {{ .Values.global.images.tags.contrail_provisioner | default (printf "%s/contrail-provisioner:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
+        imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
+        envFrom:
+        - configMapRef:
+            name: contrail-controller-env
+{{- if .Values.manifests.configmap_controller_keystone }}
+        - configMapRef:
+            name: contrail-controller-keystone
+{{- end }}
+        env:
+        - name: NODE_TYPE
+          value: config
+        - name: CASSANDRA_CQL_PORT
+          value: {{ .Values.global.contrail_env.CONFIGDB_CQL_PORT | default 9041 | quote }}
+        - name: CASSANDRA_JMX_LOCAL_PORT
+          value: {{ .Values.global.contrail_env.CONFIGDB_JMX_LOCAL_PORT | default 7200 | quote }}
+        - name: KEYSTONE_AUTH_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.keystone.admin }}
+              key: KEYSTONE_AUTH_ADMIN_PASSWORD
+        volumeMounts:
+        - mountPath: /var/log/contrail/
+          name: contrail-log
+        - mountPath: /var/crashes
+          name: var-crashes-config
+        - mountPath: /etc/contrail/ssl
+          name: ssl-dir
       volumes:
       - name: docker-unix-socket
         hostPath:

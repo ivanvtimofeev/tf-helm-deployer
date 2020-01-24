@@ -324,6 +324,37 @@ spec:
           name: var-crashes-vrouter
         - mountPath: /etc/contrail/ssl
           name: ssl-dir
+      - name: contrail-vrouter-provisioner
+        image: {{ $context.Values.global.images.tags.contrail_provisioner | default ( printf "%s/contrail-provisioner:%s" $context.Values.global.contrail_env.CONTAINER_REGISTRY $context.Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
+        imagePullPolicy: {{ default "" $context.Values.global.images.imagePullPolicy | quote }}
+        envFrom:
+        - configMapRef:
+            name: contrail-vrouter
+        - configMapRef:
+            name: {{ $config_map_name }}
+{{- if .Values.manifests.configmap_vrouter_keystone }}
+        - configMapRef:
+            name: contrail-vrouter-keystone
+{{- end }}
+        env:
+        - name: NODE_TYPE
+          value: vrouter
+        - name: DOCKER_HOST
+          value: "unix://mnt/docker.sock"
+        - name: KEYSTONE_AUTH_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.keystone.admin }}
+              key: KEYSTONE_AUTH_ADMIN_PASSWORD
+        volumeMounts:
+        - mountPath: /mnt/docker.sock
+          name: docker-unix-socket
+        - mountPath: /var/log/contrail/
+          name: contrail-log
+        - mountPath: /var/crashes
+          name: var-crashes-vrouter
+        - mountPath: /etc/contrail/ssl
+          name: ssl-dir
       volumes:
 {{- if eq $host_os "ubuntu"}}
       - name: usr-src
