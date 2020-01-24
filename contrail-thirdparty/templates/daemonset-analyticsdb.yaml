@@ -90,6 +90,39 @@ spec:
           name: contrail-log
         - mountPath: /var/crashes
           name: var-crashes-analyticsdb
+      - name: contrail-analyticsdb-nodemgr
+        image: {{ .Values.global.images.tags.contrail_nodemgr | default (printf "%s/contrail-nodemgr:%s" .Values.global.contrail_env.CONTAINER_REGISTRY .Values.global.contrail_env.CONTRAIL_CONTAINER_TAG ) | quote }}
+        imagePullPolicy: {{ default "" .Values.global.images.imagePullPolicy | quote }}
+        envFrom:
+        - configMapRef:
+            name: contrail-thirdparty-env
+{{- if .Values.manifests.configmap_thirdparty_keystone }}
+        - configMapRef:
+            name: contrail-thirdparty-keystone
+{{- end }}
+        env:
+        - name: NODE_TYPE
+          value: database
+        - name: DOCKER_HOST
+          value: "unix://mnt/docker.sock"
+        - name: CASSANDRA_CQL_PORT
+          value: {{ .Values.global.contrail_env.ANALYTICSDB_CQL_PORT | default 9042 | quote }}
+        - name: CASSANDRA_JMX_LOCAL_PORT
+          value: {{ .Values.global.contrail_env.ANALYTICSDB_JMX_LOCAL_PORT | default 7100 | quote }}
+        - name: KEYSTONE_AUTH_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.keystone.admin }}
+              key: KEYSTONE_AUTH_ADMIN_PASSWORD
+        volumeMounts:
+        - mountPath: /mnt/docker.sock
+          name: docker-unix-socket
+        - mountPath: /var/log/contrail/
+          name: contrail-log
+        - mountPath: /var/crashes
+          name: var-crashes-database
+        - mountPath: /etc/contrail/ssl
+          name: ssl-dir
       volumes:
       - name: contrail-log
         hostPath:
@@ -103,4 +136,17 @@ spec:
       - name: ssl-dir
         hostPath:
           path: /etc/contrail/ssl
+      - name: docker-unix-socket
+        hostPath:
+          path: /var/run/docker.sock
+          type: Socket
+      - name: var-crashes-database
+        hostPath:
+          path: /var/crashes
+      - name: host-usr-bin
+        hostPath:
+          path: {{ .Values.volumeMounts.host_usr_bin.hostPath }}
+      - name: host-sysctld-dir
+        hostPath:
+          path: /etc/sysctl.d          
 {{- end }}
