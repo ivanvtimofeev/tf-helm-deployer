@@ -15,6 +15,7 @@ global:
     AAA_MODE: no-auth
     JVM_EXTRA_OPTS: "-Xms1g -Xmx2g"
     KUBERNETES_PUBLIC_FIP_POOL: "{'project' : 'k8s-default', 'domain': 'default-domain', 'name': '__fip_pool_public__' , 'network' : '__public__'}"
+  # Values from this section will be passed as ENV variables to all provisioner containers
   default_env:
     VXLAN_VN_ID_MODE: "automatic"
   node:
