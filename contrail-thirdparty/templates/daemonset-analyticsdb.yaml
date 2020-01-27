@@ -129,6 +129,8 @@ spec:
         envFrom:
         - configMapRef:
             name: contrail-thirdparty-env
+        - configMapRef:
+            name: contrail-thirdparty-defaults
 {{- if .Values.manifests.configmap_thirdparty_keystone }}
         - configMapRef:
             name: contrail-thirdparty-keystone
@@ -136,10 +138,6 @@ spec:
         env:
         - name: NODE_TYPE
           value: database
-        - name: CASSANDRA_CQL_PORT
-          value: {{ .Values.global.contrail_env.ANALYTICSDB_CQL_PORT | default 9042 | quote }}
-        - name: CASSANDRA_JMX_LOCAL_PORT
-          value: {{ .Values.global.contrail_env.ANALYTICSDB_JMX_LOCAL_PORT | default 7100 | quote }}
         - name: KEYSTONE_AUTH_ADMIN_PASSWORD
           valueFrom:
             secretKeyRef:

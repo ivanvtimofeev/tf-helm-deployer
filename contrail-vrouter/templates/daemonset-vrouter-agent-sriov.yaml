@@ -332,6 +332,8 @@ spec:
             name: contrail-vrouter
         - configMapRef:
             name: {{ $config_map_name }}
+        - configMapRef:
+            name: contrail-vrouter-defaults
 {{- if .Values.manifests.configmap_vrouter_keystone }}
         - configMapRef:
             name: contrail-vrouter-keystone
@@ -339,16 +341,12 @@ spec:
         env:
         - name: NODE_TYPE
           value: vrouter
-        - name: DOCKER_HOST
-          value: "unix://mnt/docker.sock"
         - name: KEYSTONE_AUTH_ADMIN_PASSWORD
           valueFrom:
             secretKeyRef:
               name: {{ .Values.secrets.keystone.admin }}
               key: KEYSTONE_AUTH_ADMIN_PASSWORD
         volumeMounts:
-        - mountPath: /mnt/docker.sock
-          name: docker-unix-socket
         - mountPath: /var/log/contrail/
           name: contrail-log
         - mountPath: /var/crashes

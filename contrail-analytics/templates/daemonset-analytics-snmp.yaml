@@ -135,6 +135,8 @@ spec:
         envFrom:
         - configMapRef:
             name: contrail-analytics-env
+        - configMapRef:
+            name: contrail-analytics-defaults        
 {{- if .Values.manifests.configmap_analytics_keystone }}
         - configMapRef:
             name: contrail-analytics-keystone

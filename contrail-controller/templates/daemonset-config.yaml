@@ -208,6 +208,8 @@ spec:
         envFrom:
         - configMapRef:
             name: contrail-controller-env
+        - configMapRef:
+            name: contrail-controller-defaults
 {{- if .Values.manifests.configmap_controller_keystone }}
         - configMapRef:
             name: contrail-controller-keystone
@@ -215,10 +217,6 @@ spec:
         env:
         - name: NODE_TYPE
           value: config
-        - name: CASSANDRA_CQL_PORT
-          value: {{ .Values.global.contrail_env.CONFIGDB_CQL_PORT | default 9041 | quote }}
-        - name: CASSANDRA_JMX_LOCAL_PORT
-          value: {{ .Values.global.contrail_env.CONFIGDB_JMX_LOCAL_PORT | default 7200 | quote }}
         - name: KEYSTONE_AUTH_ADMIN_PASSWORD
           valueFrom:
             secretKeyRef:

@@ -110,6 +110,8 @@ spec:
         envFrom:
         - configMapRef:
             name: contrail-thirdparty-env
+        - configMapRef:
+            name: contrail-thirdparty-defaults
 {{- if .Values.manifests.configmap_thirdparty_keystone }}
         - configMapRef:
             name: contrail-thirdparty-keystone
@@ -117,18 +119,12 @@ spec:
         env:
         - name: NODE_TYPE
           value: config-database
-        - name: CASSANDRA_CQL_PORT
-          value: {{ .Values.global.contrail_env.CONFIGDB_CQL_PORT | default 9041 | quote }}
-        - name: CASSANDRA_JMX_LOCAL_PORT
-          value: {{ .Values.global.contrail_env.CONFIGDB_JMX_LOCAL_PORT | default 7200 | quote }}
         - name: KEYSTONE_AUTH_ADMIN_PASSWORD
           valueFrom:
             secretKeyRef:
               name: {{ .Values.secrets.keystone.admin }}
               key: KEYSTONE_AUTH_ADMIN_PASSWORD
         volumeMounts:
-        - mountPath: /mnt/docker.sock
-          name: docker-unix-socket
         - mountPath: /var/log/contrail/
           name: contrail-log
         - mountPath: /var/crashes

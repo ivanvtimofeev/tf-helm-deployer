@@ -154,6 +154,8 @@ spec:
         envFrom:
         - configMapRef:
             name: contrail-controller-env
+        - configMapRef:
+            name: contrail-controller-defaults
 {{- if .Values.manifests.configmap_controller_keystone }}
         - configMapRef:
             name: contrail-controller-keystone
@@ -183,6 +185,8 @@ spec:
         envFrom:
         - configMapRef:
             name: contrail-controller-env
+        - configMapRef:
+            name: contrail-controller-defaults
 {{- if .Values.manifests.configmap_controller_keystone }}
         - configMapRef:
             name: contrail-controller-keystone

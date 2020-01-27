@@ -239,6 +239,8 @@ spec:
             name: contrail-vrouter
         - configMapRef:
             name: contrail-vrouter-kernel
+        - configMapRef:
+            name: contrail-vrouter-defaults
 {{- if .Values.manifests.configmap_vrouter_keystone }}
         - configMapRef:
             name: contrail-vrouter-keystone
